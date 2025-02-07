@@ -1,0 +1,15 @@
+1. Install Node.  Download latest LTS version
+	https://nodejs.org/en/download
+2. Open command prompt, type node --version check the version
+3. Install Angular/cli.  Open command prompt
+	npm install -g @angular/cli
+4. Create first project.  Navigate to folder, type in command prompt:
+	ng new first-angular-app
+	This will set up the new angular project
+5. Open project folder with vscode
+
+
+Creating new Component in Angular:
+--	This will create a new component called user
+
+ng g c user
