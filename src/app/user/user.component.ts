@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { DUMMY_USERS } from '../dummy-users';
+import { DUMMY_USERS, signal } from '../dummy-users';
 
 const RandomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 
@@ -13,5 +13,17 @@ const RandomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 })
 export class UserComponent {
 
-  selectedUser = DUMMY_USERS[RandomIndex];
+  //  Using Signal... which refreshes data on event... 
+  selectedUser = signal( DUMMY_USERS[RandomIndex]);
+
+  get imagePath() {
+    return 'assets/users/' + this.selectedUser.avatar;
+  }
+
+  onSelectUser(){
+    //console.log('clicked');
+    const RandomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
+    this.selectedUser.set(DUMMY_USERS[RandomIndex]);
+  }
+
 }
