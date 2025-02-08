@@ -1,5 +1,11 @@
 import { Component, EventEmitter, input, Input, Output } from '@angular/core';
 
+type User = {
+  id: string;
+  avatar: string;
+  name: string;
+}
+
 @Component({
   selector: 'app-user',
   standalone: true,
@@ -10,11 +16,7 @@ import { Component, EventEmitter, input, Input, Output } from '@angular/core';
 export class UserComponent {
   //  Required:true means the html requires the attribute!
 
-  @Input({ required: true }) user!: {
-    id: string;
-    avatar: string;
-    name: string;
-  };
+  @Input({ required: true }) user!: User;
 
   //  This is how I handled the inputs one at a time
   /*
