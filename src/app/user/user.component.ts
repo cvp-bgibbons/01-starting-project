@@ -1,35 +1,27 @@
-import { Component } from '@angular/core';
-
-import { DUMMY_USERS, signal, computed } from '../dummy-users';
-
-const RandomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
+import { Component, EventEmitter, input, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-user',
   standalone: true,
   imports: [],
   templateUrl: './user.component.html',
-  styleUrl: './user.component.css'
+  styleUrl: './user.component.css',
 })
 export class UserComponent {
+  //  Required:true means the html requires the attribute!
+  @Input ({required:true}) id!: string;
+  @Input({ required: true }) avatar!: string;
+  @Input({ required: true }) name!: string;
 
-  //  Using Signal... which refreshes data on event... 
-  selectedUser = signal( DUMMY_USERS[RandomIndex]);
-  imagePath = computed(() => 'assets/users/' + this.selectedUser().avatar);
+  @Output() select = new EventEmitter();
 
-
-
-  //  This is how you get it the old way
-  /*
   get imagePath() {
-    return 'assets/users/' + this.selectedUser.avatar;
-  }
-    */
-
-  onSelectUser(){
-    //console.log('clicked');
-    const RandomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
-    this.selectedUser.set(DUMMY_USERS[RandomIndex]);
+    return 'assets/users/' + this.avatar;
   }
 
+  onSelectUser() {
+
+    this.select.emit(this.id);
+
+  }
 }
