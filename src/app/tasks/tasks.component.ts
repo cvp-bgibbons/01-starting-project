@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { TaskComponent } from './task/task.component';
-import { NewTaskComponent } from "./new-task/new-task.component";
+import { NewTaskComponent } from './new-task/new-task.component';
+import { NewDataData } from './new-task/new-task.model';
 
 @Component({
   selector: 'app-tasks',
@@ -10,13 +11,10 @@ import { NewTaskComponent } from "./new-task/new-task.component";
   styleUrl: './tasks.component.css',
 })
 export class TasksComponent {
-
-
-  @Input({required: true}) userId!: string;
+  @Input({ required: true }) userId!: string;
   @Input({ required: true }) name: string | undefined;
 
   isAddingTask: boolean = false;
-
 
   tasks = [
     {
@@ -44,16 +42,27 @@ export class TasksComponent {
     },
   ];
 
-  get selectedUserTasks(){
-    return this.tasks.filter((task) => task.userId === this.userId );
+  get selectedUserTasks() {
+    return this.tasks.filter((task) => task.userId === this.userId);
   }
 
-  onStartAddTask()
-  {
+  onStartAddTask() {
     this.isAddingTask = true;
   }
 
-  onCancelAddTask(){
+  onCancelAddTask() {
+    this.isAddingTask = false;
+  }
+
+  onAddTask(taskData: NewDataData) {
+    this.tasks.push({
+      id: new Date().getTime().toString(),
+      userId: this.userId,
+      summary: taskData.summary,
+      title: taskData.title,
+      dueDate: taskData.date,
+    });
+
     this.isAddingTask = false;
   }
 }
