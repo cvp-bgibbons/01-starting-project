@@ -1,6 +1,7 @@
 @if(isAddingTask){
   <app-new-task (cancel)="onCancelAddTask()" (add)="onAddTask($event)"></app-new-task>
 }
+<app-card>
 <section id="tasks">
   <header>
     <h2>{{ name }}'s Tasks</h2>
@@ -19,3 +20,4 @@
     }
   </ul>
 </section>
+</app-card>
